@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { TodoItem } from "../types";
+import { AddTodoItem } from "./AddTodoItem";
 import { TodoItem as TodoItemComponent } from "./TodoItem";
 import "./TodoList.css";
 
@@ -9,52 +10,27 @@ type TodoListProps = {
 
 export const TodoList: FC<TodoListProps> = ({ items: itemsProps }) => {
   const [items, setItems] = useState(itemsProps);
+  const [nextId, setNextId] = useState(items.length);
 
   const addItem = (item: TodoItem) => {
     setItems([...items, item]);
   };
 
+  const deleteItem = (id: number) => {
+    setItems(items.filter((x) => x.id !== id));
+  };
+
+  const getNewId = () => {
+    setNextId((prev) => prev + 1);
+    return nextId;
+  };
+
   return (
     <div className="todoList">
       {items.map((item) => (
-        <TodoItemComponent key={item.id} {...item} />
+        <TodoItemComponent key={item.id} {...item} deleteItem={deleteItem} />
       ))}
-      <AddTodoItem addItem={addItem} totalCount={items.length} />
+      <AddTodoItem addItem={addItem} getNewId={getNewId} />
     </div>
-  );
-};
-
-type AddTodoItemProps = {
-  addItem: (item: TodoItem) => void;
-  totalCount: number;
-};
-
-export const AddTodoItem: FC<AddTodoItemProps> = ({ addItem, totalCount }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const handleAddItem = () => {
-    const newTodo: TodoItem = {
-      id: totalCount,
-      title,
-      description,
-    };
-    console.log("add item ", newTodo);
-    addItem(newTodo);
-  };
-  return (
-    <>
-      <div>
-        title:
-        <input value={title} onChange={(e) => setTitle(e.target.value)} />
-      </div>
-      <div>
-        description:{" "}
-        <input
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </div>
-      <button onClick={handleAddItem}> ADD</button>
-    </>
   );
 };

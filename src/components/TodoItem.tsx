@@ -3,12 +3,15 @@ import { TodoItem as TodoItemType } from "../types";
 import { H1 } from "./atomic/H1";
 import "./TodoItem.css";
 
-type TodoItemProps = TodoItemType;
+type TodoItemProps = TodoItemType & {
+  deleteItem: (id: number) => void;
+};
 
 export const TodoItem: React.FC<TodoItemProps> = ({
   id,
   title,
   description,
+  deleteItem,
 }) => {
   return (
     <div className="todoItem">
@@ -18,6 +21,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
       </H1>
       <hr />
       <div className="description">{description}</div>
+      <button onClick={() => deleteItem(id)}>Smazat</button>
     </div>
   );
 };
