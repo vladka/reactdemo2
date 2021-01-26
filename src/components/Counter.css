@@ -1,0 +1,8 @@
+.normalBtn {
+  background-color: silver;
+}
+
+.warningBtn {
+  background-color: red;
+  border: solid 2px red;
+}
