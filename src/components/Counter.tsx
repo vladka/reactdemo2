@@ -22,7 +22,7 @@ export const Counter: React.FC<CounterProps> = ({ initialValue }) => {
     console.log("volal se useEffect ", document.body.offsetWidth);
     const handleId = setTimeout(() => {
       console.log("timeout has run");
-      document.body.style.zoom = "3";
+      //document.body.style.zoom = "3";
     }, 3000);
     return () => {
       console.log("uklizim timeout", handleId);

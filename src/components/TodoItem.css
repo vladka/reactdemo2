@@ -1,0 +1,10 @@
+.todoItem {
+  border: solid 1px gray;
+  background: gray;
+  padding: 16px;
+  margin: 8px;
+}
+
+.description {
+  font-style: italic;
+}
