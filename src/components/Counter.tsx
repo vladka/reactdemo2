@@ -19,17 +19,16 @@ export const Counter: React.FC<CounterProps> = ({ initialValue }) => {
   };
 
   useEffect(() => {
-    console.log("count se zmenil");
+    console.log("volal se useEffect ", document.body.offsetWidth);
     const handleId = setTimeout(() => {
       console.log("timeout has run");
-      //document.body.style.zoom = "3";
+      document.body.style.zoom = "3";
     }, 3000);
-    //document.body.offsetWidth
     return () => {
-      //uklid
+      console.log("uklizim timeout", handleId);
       clearTimeout(handleId);
     };
-  }, []);
+  }, [count, state]);
 
   return (
     <button className={`${state}Btn`} type="button" onClick={handleClick}>
