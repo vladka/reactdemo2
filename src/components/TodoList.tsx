@@ -1,18 +1,22 @@
 import React, { FC, useEffect, useState } from "react";
-import { TodoItem } from "../types";
+import { JsonItem } from "../types";
 import { AddTodoItem } from "./AddTodoItem";
 import { TodoItem as TodoItemComponent } from "./TodoItem";
 import "./TodoList.css";
 
 type TodoListProps = {
-  items: TodoItem[];
+  items: JsonItem[];
 };
 
 export const TodoList: FC<TodoListProps> = ({ items: itemsProps }) => {
   const [items, setItems] = useState(itemsProps);
   const [nextId, setNextId] = useState(items.length);
 
-  const addItem = (item: TodoItem) => {
+  useEffect(() => {
+    setItems(itemsProps);
+  }, [itemsProps]);
+
+  const addItem = (item: JsonItem) => {
     setItems([...items, item]);
   };
 

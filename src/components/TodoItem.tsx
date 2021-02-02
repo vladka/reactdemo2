@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { TodoItem as TodoItemType } from "../types";
+import { JsonItem as TodoItemType } from "../types";
 import { H1 } from "./atomic/H1";
 import "./TodoItem.css";
 
@@ -10,7 +10,8 @@ type TodoItemProps = TodoItemType & {
 export const TodoItem: React.FC<TodoItemProps> = ({
   id,
   title,
-  description,
+  completed,
+  userId,
   deleteItem,
 }) => {
   return (
@@ -20,7 +21,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
         <sup>#{id}</sup>
       </H1>
       <hr />
-      <div className="description">{description}</div>
+      <div className="description">{userId}</div>
       <button onClick={() => deleteItem(id)}>Smazat</button>
     </div>
   );

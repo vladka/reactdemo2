@@ -1,8 +1,8 @@
 import React, { FC, useState } from "react";
-import { TodoItem } from "../types";
+import { JsonItem } from "../types";
 
 type AddTodoItemProps = {
-  addItem: (item: TodoItem) => void;
+  addItem: (item: JsonItem) => void;
   getNewId: () => number;
 };
 
@@ -10,10 +10,11 @@ export const AddTodoItem: FC<AddTodoItemProps> = ({ addItem, getNewId }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const handleAddItem = () => {
-    const newTodo: TodoItem = {
+    const newTodo: JsonItem = {
       id: getNewId(),
       title,
-      description,
+      userId: 1,
+      completed: false,
     };
     console.log("add item ", newTodo);
     addItem(newTodo);
