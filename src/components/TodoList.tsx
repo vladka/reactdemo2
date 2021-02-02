@@ -3,31 +3,14 @@ import { JsonItem } from "../types";
 import { AddTodoItem } from "./AddTodoItem";
 import { TodoItem as TodoItemComponent } from "./TodoItem";
 import "./TodoList.css";
+import { useTodoList } from "./useTodoList";
 
 type TodoListProps = {
   items: JsonItem[];
 };
 
 export const TodoList: FC<TodoListProps> = ({ items: itemsProps }) => {
-  const [items, setItems] = useState(itemsProps);
-  const [nextId, setNextId] = useState(items.length);
-
-  useEffect(() => {
-    setItems(itemsProps);
-  }, [itemsProps]);
-
-  const addItem = (item: JsonItem) => {
-    setItems([...items, item]);
-  };
-
-  const deleteItem = (id: number) => {
-    setItems(items.filter((x) => x.id !== id));
-  };
-
-  const getNewId = () => {
-    setNextId((prev) => prev + 1);
-    return nextId;
-  };
+  const [getNewId, deleteItem, addItem, items] = useTodoList(itemsProps);
 
   return (
     <div className="todoList">
