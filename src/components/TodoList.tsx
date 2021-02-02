@@ -18,7 +18,7 @@ export const TodoList: FC<TodoListProps> = ({ items: itemsProps }) => {
     items,
     totalCount,
     pageCount,
-  } = useTodoList(itemsProps);
+  } = useTodoList(itemsProps, pageSize);
   const [page, setPage] = useState(0);
   const onePageItems = items.slice(page * pageSize, page * pageSize + pageSize);
   return (
