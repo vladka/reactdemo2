@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TodoItem as TodoItemType } from "../types";
 import { AddTodoItem } from "./AddTodoItem";
 import { TodoItem } from "./TodoItem";
@@ -10,6 +10,10 @@ type TodoListProps = {
 export const TodoList: React.FC<TodoListProps> = ({ items: itemsProps }) => {
   const [items, setItems] = useState(itemsProps);
   const [nextId, setNextId] = useState(itemsProps.length);
+
+  useEffect(() => {
+    setItems(itemsProps);
+  }, [itemsProps]);
 
   const deleteItem = (id: number) => {
     setItems(items.filter((x) => x.id !== id));
