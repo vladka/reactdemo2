@@ -10,14 +10,19 @@ type TodoListProps = {
 };
 
 export const TodoList: FC<TodoListProps> = ({ items: itemsProps }) => {
-  const [getNewId, deleteItem, addItem, items] = useTodoList(itemsProps);
+  const {getNewId, deleteItem, addItem, items, totalCount, pageCount} = useTodoList(itemsProps);
 
   return (
+    <>
+    <div className="pages">
+    <button>&lt;</button>  (1/{pageCount}) <button>&gt;</button>
+    </div>
     <div className="todoList">
       {items.map((item) => (
         <TodoItemComponent key={item.id} {...item} deleteItem={deleteItem} />
       ))}
       <AddTodoItem addItem={addItem} getNewId={getNewId} />
     </div>
+    </>
   );
 };
