@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { JsonItem } from "../types";
 
-export const useTodoList = (itemsProps: JsonItem[]) => {
+export const useTodoList = (itemsProps: JsonItem[], pageSize = 10) => {
   const [items, setItems] = useState(itemsProps);
   const [nextId, setNextId] = useState(items.length);
+  const totalCount = items.length;
+  const pageCount = Math.ceil(totalCount / pageSize);
 
   useEffect(() => {
     setItems(itemsProps);
@@ -22,5 +24,5 @@ export const useTodoList = (itemsProps: JsonItem[]) => {
     return nextId;
   };
 
-  return [getNewId, deleteItem, addItem, items] as const;
+  return {getNewId, deleteItem, addItem, items, totalCount, pageCount};
 };
