@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { JsonItem } from "../types";
 
-const pageSize = 10;
-
 export const useTodoList = (itemsProps: JsonItem[], pageSize = 10) => {
   const [items, setItems] = useState(itemsProps);
   const [nextId, setNextId] = useState(items.length);
